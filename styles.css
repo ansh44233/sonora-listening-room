@@ -13,3 +13,15 @@
 @media(max-width:1150px){.app-shell{grid-template-columns:58px 210px minmax(380px,1fr);grid-template-rows:minmax(620px,1fr) 82px}.now-panel{display:none}.player-bar{grid-column:2/4}.hero-art{right:2%;transform:scale(.85)}}
 @media(max-width:760px){.room{padding:12px 10px 16px}.app-shell{display:grid;grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr) auto;border-radius:19px;min-height:calc(100vh - 52px)}.icon-rail{grid-row:auto;grid-column:1;flex-direction:row;padding:8px 14px;gap:12px;border-right:0;border-bottom:1px solid var(--line);justify-content:space-between}.brand-mark{margin:0;font-size:23px}.rail-btn{width:34px;height:34px;font-size:20px}.rail-bottom{margin:0}.library-panel,.now-panel{display:none}.main-panel{padding:15px 13px 10px;grid-row:2}.topbar{gap:8px;margin-bottom:14px}.history-buttons{display:none}.artist-hero{min-height:235px;padding:20px 17px}.hero-copy{max-width:72%}.hero-copy h1{font-size:35px}.hero-art{right:-60px;opacity:.65;transform:scale(.7)}.hero-description{max-width:210px;font-size:10px}.content-section{margin-top:21px}.section-heading h2{font-size:17px}.mood-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mood-card{height:100px}.track-head,.track-row{grid-template-columns:20px minmax(0,1fr) 38px 20px}.track-head span:nth-child(3),.track-row .track-album{display:none}.track-info img{width:34px;height:34px}.main-footer{gap:10px;flex-wrap:wrap;font-size:6px}.player-bar{grid-column:1;grid-row:3;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:10px 12px}.player-track{grid-column:1}.player-controls{grid-column:1/3;grid-row:2}.player-extra{grid-column:2;grid-row:1}.player-extra input,.player-extra .volume-icon{display:none}.control-buttons{gap:26px}.room-caption{font-size:7px;padding:0 4px}.toast{bottom:150px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Small interaction details that make the library feel like part of the app. */
+.library-item,.queue-item{width:100%;border:0;text-align:left;background:transparent;color:inherit;font:inherit;padding:4px;border-radius:8px}
+.library-item:hover,.queue-item:hover{background:#ffffff12}
+.library-item span{min-width:0}
+.library-item:focus-visible,.queue-item:focus-visible,.track-row:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.empty-state{min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;color:#c9d0c2;padding:25px}
+.empty-state>span{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#a6d52b1c;color:var(--lime);font-size:20px}
+.empty-state b{font:600 13px var(--display)}
+.empty-state small{font-size:10px;color:#969e91}
+.empty-state.error>span{background:#d98c8c22;color:#e5a0a0}
+#open-apple:disabled{opacity:.35;cursor:not-allowed}
