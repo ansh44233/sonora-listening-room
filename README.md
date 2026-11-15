@@ -50,7 +50,7 @@ Browser → GET /api/search?q=... → Vercel serverless function → YouTube Dat
 ## Project structure
 
 - api/search.js — server-side YouTube search and metadata
-- assets/preview.svg — project artwork
+- assets/preview.svg — project artwork\n- assets/sonora-mark.svg — SONORA app icon\n- auth.js — Firebase authentication flows\n- firebase-config.js — public Firebase web app configuration placeholders
 - tests/search.test.js — duration parsing test
 - app2.js — current YouTube player and UI state
 - app.js — previous Apple preview implementation; not loaded
@@ -85,12 +85,12 @@ No frontend build command is required. The /api/search route runs as a Vercel No
 
 Run 'npm test'. The included unit test checks ISO-8601 video duration parsing. It does not replace browser testing of actual YouTube playback, which depends on each video's embed permissions and availability.
 
-## Current scope
+## Accounts and email verification\n\nSONORA includes a Firebase Authentication UI for Google sign-in, email/password registration, email verification, password reset and sign-out. To activate it:\n\n1. Create a Firebase project and register a Web app.\n2. In Firebase Console → Authentication → Sign-in method, enable **Google** and **Email/Password**.\n3. In Authentication → Settings → Authorized domains, add your Vercel hostname (for example, `sonora-listening-room.vercel.app`).\n4. Copy the Web app configuration into `firebase-config.js`. The web config is client-side configuration; restrict its API key to the Firebase APIs you use and authorized domains. Never put service-account credentials in frontend code.\n5. In Authentication → Templates, review the verification and password-reset email templates and sender settings. Firebase sends these emails; configure a custom email domain/provider if you need branded delivery.\n\nGoogle OAuth also needs the Google provider enabled in Firebase. For local testing, add `localhost` to Authorized domains. Account sign-in is separate from the locally stored liked/recent library; cross-device library sync is not included yet.\n\n## Current scope
 
 - Search and YouTube embedded playback: implemented in the current frontend/backend code.
 - Liked and recently played tracks: persisted locally in this browser.
 - Playlist creation and editing: not yet implemented.
-- Account login and cross-device sync: not implemented.
+- Google and email/password authentication UI: implemented; requires Firebase project configuration.\n- Cross-device library sync: not implemented.
 - Automated browser playback tests: not yet implemented.
 
 ## Limits and configuration
