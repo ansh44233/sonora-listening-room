@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const api=require('../api/search');test('parses YouTube durations',()=>{assert.equal(api.seconds('PT4M13S'),253);assert.equal(api.seconds('PT1H2M9S'),3729);assert.equal(api.pretty(253),'4:13');assert.equal(api.pretty(3729),'1:02:09')});
