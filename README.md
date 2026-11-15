@@ -1,119 +1,124 @@
 <div align="center">
 
-  <img src="assets/preview.svg" alt="SONORA — a listening room for music discovery" width="100%" />
+  <img src="assets/preview.svg" alt="SONORA — Find your sound. Make room for music." width="100%" />
 
   <h1>SONORA</h1>
   <p><strong>Find your sound. Make room for music.</strong></p>
-  <p>A responsive music-discovery experience with YouTube-powered search, official embedded playback, personal libraries, playlists and Firebase authentication.</p>
+  <p>A personal music-discovery and listening-room web app — built from scratch with vanilla JavaScript, YouTube's official player, Firebase Authentication and Cloud Firestore.</p>
 
   <p>
-    <img src="https://img.shields.io/badge/status-active%20development-a6d52b?style=for-the-badge&labelColor=171b16" alt="Active development">
-    <img src="https://img.shields.io/badge/JavaScript-vanilla-f7df1e?style=for-the-badge&logo=javascript&logoColor=171717" alt="JavaScript">
-    <img src="https://img.shields.io/badge/Firebase-authentication-ffca28?style=for-the-badge&logo=firebase&logoColor=171717" alt="Firebase">
-    <img src="https://img.shields.io/badge/Vercel-deployment-ffffff?style=for-the-badge&logo=vercel&logoColor=000000" alt="Vercel">
+    <a href="https://sonora-listening-room.vercel.app/"><img src="https://img.shields.io/badge/Live%20App-Open%20SONORA-a6d52b?style=for-the-badge&labelColor=171b16" alt="Open live app"></a>
+    <a href="https://github.com/ansh44233/sonora-listening-room"><img src="https://img.shields.io/badge/Source-GitHub-ffffff?style=for-the-badge&logo=github&logoColor=181717" alt="GitHub repository"></a>
+    <img src="https://img.shields.io/badge/JavaScript-Vanilla-f7df1e?style=for-the-badge&logo=javascript&logoColor=171717" alt="Vanilla JavaScript">
+    <img src="https://img.shields.io/badge/Hosted%20on-Vercel-ffffff?style=for-the-badge&logo=vercel&logoColor=000000" alt="Vercel">
   </p>
+  <p><sub>Independent portfolio project · Created by <a href="https://github.com/ansh44233">ansh44233</a></sub></p>
 </div>
 
 ---
 
-## Overview
+## The idea
 
-SONORA is a music listening-room web application built around a simple idea: make discovering and playing music feel focused, personal and delightful on both desktop and mobile.
+SONORA is a web-based listening room designed to make music discovery feel calm, focused and personal. It brings search, playback, mood-led discovery and a personal library into one responsive interface.
 
-The interface combines a curated-feeling home screen, mood shortcuts, searchable YouTube results, a persistent playback bar, a movable video stage and a personal collection. The project uses the official YouTube embedded player rather than extracting or proxying audio.
+The product uses YouTube's official embedded player for playback. It does not download, extract or proxy music streams.
 
-**Live experience:** [sonora-listening-room.vercel.app](https://sonora-listening-room.vercel.app/)  
-**Source code:** [github.com/ansh44233/sonora-listening-room](https://github.com/ansh44233/sonora-listening-room)
+**Try it:** [sonora-listening-room.vercel.app](https://sonora-listening-room.vercel.app/) · **Explore the code:** [GitHub repository](https://github.com/ansh44233/sonora-listening-room)
 
-## Product highlights
+## Product preview
 
-### Discover
-- Search music videos through the YouTube Data API v3.
-- Explore quick mood searches for indie, chill, pop and focus.
-- View video artwork, channel names and duration metadata.
-- Search is submitted on Enter to avoid unnecessary API quota usage.
+The images below are live captures of the deployed app at desktop and mobile viewport widths. They are generated from the public deployment, so they reflect the current live build rather than hand-edited concept art. If the deployment is sleeping or temporarily unavailable, open the live app directly.
 
-### Listen
-- Play and pause, skip tracks, seek and adjust volume.
-- In-app navigation keeps the YouTube player mounted; switching between Home, Search and Library does not intentionally restart the current track.
-- Minimize collapses the player controls without removing the embedded player, helping preserve ongoing playback.
-- Shuffle and repeat controls.
-- Movable YouTube playback stage with minimize, restore and close actions.
-- Compact playback bar and responsive mobile layout.
-- Official YouTube player controls remain available.
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <strong>Desktop experience</strong><br>
+      <a href="https://sonora-listening-room.vercel.app/">
+        <img src="https://image.thum.io/get/width/1440/crop/1000/noanimate/https://sonora-listening-room.vercel.app/" alt="SONORA desktop live capture" width="100%">
+      </a>
+    </td>
+    <td align="center" width="50%">
+      <strong>Mobile experience</strong><br>
+      <a href="https://sonora-listening-room.vercel.app/">
+        <img src="https://image.thum.io/get/width/390/crop/844/noanimate/https://sonora-listening-room.vercel.app/" alt="SONORA mobile live capture" width="100%">
+      </a>
+    </td>
+  </tr>
+</table>
 
-### Your library
-- Like and revisit tracks.
-- Recently played list.
-- Create, rename, open and delete playlists.
-- Add search results to playlists.
-- Local browser persistence using `localStorage` for signed-out sessions.
-- Signed-in library backup and cross-device sync through Cloud Firestore, scoped to the authenticated user.
+## What you can do
 
-### Your account
-- Google sign-in through Firebase Authentication.
-- Email/password registration and sign-in.
-- Email verification and password-reset email.
-- Display-name editing and sign-out.
-
-### Experience details
-- Responsive desktop and mobile layouts.
-- Mobile bottom navigation and compact player.
-- Keyboard shortcuts: `Space` play/pause, `←` / `→` seek by ten seconds, `/` focus search.
-- Accessible labels and visible focus states for key controls.
-
-## Screens and interaction model
-
-| Area | Purpose |
+| Area | Experience |
 |---|---|
-| Home | Mood discovery and fresh search results |
-| Search | Find videos and select a result |
-| Your Library | Liked tracks, recent listening and playlists |
-| Player bar | Playback controls and current track |
-| Video stage | Official YouTube embed; draggable, minimizable and restorable |
-| Account | Sign-in, registration, profile display name and sign-out |
+| Discover | Search YouTube music videos and explore mood-based searches |
+| Listen | Play, pause, seek, change volume, skip, shuffle and repeat |
+| Player | Use the official YouTube embed in a draggable, minimizable player stage |
+| Library | Like tracks and revisit recently played music |
+| Playlists | Create, rename, open, add tracks to and delete playlists |
+| Accounts | Sign in with Google or email/password using Firebase Authentication |
+| Profile | Update the account display name and sign out |
+| Cloud library | Sync likes, recent tracks and playlists to a user-scoped Firestore document after setup |
+| Responsive UI | Desktop layout, compact mobile navigation and mobile player controls |
 
-## Architecture
+### Interaction details
+
+- Search is submitted with Enter, avoiding a YouTube API request on every keystroke.
+- In-app navigation is designed to keep the YouTube player mounted while changing views.
+- The player stage can be dragged, minimized, restored and closed.
+- Likes, recent tracks and playlists are stored locally, and can be synchronized to Firestore for signed-in users.
+- The account panel includes profile controls and an autoplay-next preference.
+
+> **Playback note:** YouTube video owners control whether a video can be embedded. Private, removed, age-restricted, region-restricted or non-embeddable videos may not play. Browser and operating-system power policies can also affect background playback.
+
+## How it is built
 
 ```text
-Browser UI
-  ├── app2.js
-  │    ├── Search and result state
-  │    ├── Playback controls / YouTube IFrame Player API
-  │    ├── Likes, recent tracks and playlists (localStorage)
-  │    └── Responsive player interactions
-  │
-  ├── auth.js ───────── Firebase Authentication
-  │
-  └── GET /api/search?q=...
-          └── Vercel serverless function
-                  └── YouTube Data API v3
+SONORA
+├── Frontend
+│   ├── index.html          App structure and dialogs
+│   ├── styles.css          Responsive visual system
+│   ├── app2.js             Search, playback, library and playlists
+│   └── auth.js             Authentication and cloud-library sync
+│
+├── Serverless API
+│   └── api/search.js       Server-side YouTube Data API requests
+│
+├── Firebase
+│   ├── Firebase Auth       Google + email/password accounts
+│   └── Cloud Firestore     Per-user library document
+│
+├── tests/
+│   └── search.test.js      Node.js API utility and validation tests
+│
+└── .github/workflows/
+    └── ci.yml              Automated test workflow
 ```
 
-## Technology
+### Technology
 
-| Layer | Technology |
+| Layer | Tools |
 |---|---|
-| UI | HTML5, CSS3, vanilla JavaScript |
-| Authentication | Firebase Authentication |
-| Music discovery | YouTube Data API v3 |
+| Frontend | HTML5, CSS3, vanilla JavaScript |
+| Music search | YouTube Data API v3 |
 | Playback | YouTube IFrame Player API |
-| Serverless API | Vercel Functions / Node.js |
-| Browser persistence | localStorage |
-| Cloud library | Cloud Firestore with per-user security rules |
+| Backend endpoint | Vercel Serverless Functions, Node.js |
+| Authentication | Firebase Authentication |
+| Cloud data | Cloud Firestore |
+| Local persistence | Browser localStorage |
 | Tests | Node.js built-in test runner |
-| Hosting | Vercel |
+| CI | GitHub Actions |
+| Deployment | Vercel |
 
-## Run locally
+## Run it locally
 
-### Requirements
+### Prerequisites
 
-- Node.js (use a currently supported LTS release).
-- A Google Cloud project with YouTube Data API v3 enabled.
-- A Firebase project if you want to test account features.
-- Vercel CLI for the local serverless API route.
+- A currently supported Node.js LTS version
+- A Google Cloud project with YouTube Data API v3 enabled
+- A Firebase project for account and cloud-library features
+- Vercel CLI for running the serverless API locally
 
-### 1. Clone
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/ansh44233/sonora-listening-room.git
@@ -123,109 +128,131 @@ npm install
 
 ### 2. Configure YouTube search
 
-Copy `.env.example` to `.env.local` and add:
+Create a local environment file from the example:
+
+```bash
+cp .env.example .env.local
+```
+
+Add your YouTube Data API key:
 
 ```env
 YOUTUBE_API_KEY=your_youtube_data_api_key
 ```
 
-Keep this key server-side. Do not put it in browser JavaScript or commit a real key.
+Keep this key on the server. Never expose it in frontend JavaScript or commit a real key.
 
-### 3. Configure Firebase Authentication
+### 3. Configure Firebase
 
-Update `firebase-config.js` with your Firebase Web App configuration. In Firebase Console:
+1. Create or open your Firebase project.
+2. Add a Firebase Web App and copy its web configuration into `firebase-config.js`.
+3. Enable Google and Email/Password providers under **Authentication → Sign-in method**.
+4. Add your local and production hostnames under **Authentication → Settings → Authorized domains**.
+5. Review your email verification and password-reset settings.
 
-1. Enable Google and Email/Password providers under Authentication → Sign-in method.
-2. Add your local and deployed hostnames under Authentication → Settings → Authorized domains.
-3. Review email verification and password-reset templates.
-4. Restrict the browser API key to the Firebase APIs and domains used by the project.
+The Firebase web config is intended for browser use. It is not an Admin SDK credential. Never commit service-account JSON or private server keys.
 
-Firebase web configuration is client-side configuration, not an Admin SDK credential. Never commit service-account JSON or private keys.
+### 4. Enable Cloud Firestore sync
 
-### 4. Enable cloud library sync (optional but recommended)
+1. Create a **Cloud Firestore** database in the same Firebase project.
+2. Use the default database ID unless you have a specific reason not to.
+3. In **Firestore → Rules**, publish the rules from `firestore.rules`.
+4. Keep the rules restricted to the signed-in user's own UID.
 
-1. Create a Cloud Firestore database in the same Firebase project.
-2. In Firebase Console → Firestore → Rules, publish the rules from `firestore.rules` (or deploy them with the Firebase CLI).
-3. The rules allow each authenticated user to access only `sonoraLibraries/{their-uid}`. Do not replace them with public read/write rules.
-4. When a user signs in, SONORA merges the browser library with that user's cloud library and saves future library changes to Firestore. Signed-out use remains local-only.
+The repository's rules are:
 
-Cloud sync requires Firestore to be enabled and the security rules to be published. Authentication alone does not create the Firestore database.
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /sonoraLibraries/{userId} {
+      allow read, create, update, delete: if request.auth != null
+        && request.auth.uid == userId;
+    }
+  }
+}
+```
 
-### 5. Start the app
+SONORA stores each signed-in user's library at `sonoraLibraries/{uid}`. Signed-out data remains in that browser's local storage. Cloud sync is available only after Firestore is created, the rules are published and Firebase Authentication is configured.
+
+### 5. Start the development server
 
 ```bash
 npx vercel dev
 ```
 
-Open the local URL shown by Vercel. The API route will not work if you open `index.html` directly as a file.
+Open the local URL provided by Vercel. Do not open `index.html` directly as a file: the YouTube search endpoint is a serverless route.
 
-## Deploy to Vercel
+## Deploy
 
-1. Import the GitHub repository into Vercel.
-2. Add `YOUTUBE_API_KEY` in Project Settings → Environment Variables.
-3. Confirm the Firebase production hostname is in Authorized domains.
+1. Import this GitHub repository into Vercel.
+2. Add `YOUTUBE_API_KEY` under **Project Settings → Environment Variables**.
+3. Confirm the deployed domain is listed in Firebase Authentication's authorized domains.
 4. Deploy the `main` branch.
-5. Test search, playback, account flows and mobile layout on the deployed URL.
+5. Verify search, playback, authentication, Firestore sync and mobile layout on the deployed site.
 
-No frontend bundler is required for the current vanilla-JavaScript app.
+Vercel is connected to the repository for deployment. A successful Git push does not by itself prove that every third-party integration is configured; complete the verification steps below after deployment.
 
-## Verification
+## Quality checks
 
-Run the automated tests:
+Run the automated suite locally:
 
 ```bash
 npm test
 ```
 
-The current automated suite covers API utility behavior. It does not replace browser-level checks for Firebase OAuth, YouTube embed permissions, responsive behavior or real playback.
+The current tests cover YouTube duration parsing, invalid duration handling, HTTP method validation, empty search input and missing API-key handling. GitHub Actions runs the test command on pushes and pull requests targeting `main`.
 
-Suggested release checklist:
+### Manual release checklist
 
-- [ ] Search returns results with a valid API key.
-- [ ] A video that allows embedding plays in the official YouTube player.
-- [ ] Minimize and restore keep playback state intact.
-- [ ] Like, recent and playlist actions persist after refresh in the same browser.
+- [ ] Search returns results with a valid server-side API key.
+- [ ] An embeddable video plays in the official YouTube player.
+- [ ] Play, pause, seek, volume, next, previous, shuffle and repeat work.
+- [ ] Minimize and restore preserve the active player session.
+- [ ] Likes, recent tracks and playlists survive a page refresh.
 - [ ] Google sign-in works on the deployed authorized domain.
-- [ ] Email registration, verification and password reset work.
-- [ ] Mobile navigation, search, player and account modal fit common phone widths.
+- [ ] Email sign-up, verification, sign-in and password reset work.
+- [ ] Firestore sync works after publishing the rules.
+- [ ] Two different accounts cannot read or overwrite each other's library.
+- [ ] Mobile navigation, search, account dialog and player fit common phone widths.
+- [ ] Keyboard navigation and visible focus states are usable.
 
-## Important product boundaries
+Automated API tests are not a substitute for browser-level, mobile-device or Firebase security testing. Do not treat unchecked items as verified.
 
-- **Playback:** SONORA embeds YouTube videos. It does not download, extract, proxy, strip ads from or bypass restrictions on YouTube media.
-- **Availability:** A video may be unavailable for embedding, private, region-restricted, age-restricted or removed. The video owner and YouTube determine playback availability.
-- **Library sync:** Signed-out likes, recent tracks and playlists stay in browser storage. Signed-in users can sync these collections through Cloud Firestore after enabling the database and publishing `firestore.rules`.
-- **Authentication:** Firebase Authentication identifies the user; Firestore rules restrict each library document to its owner. Keep Firestore rules enabled and never use public read/write access.
-- **Quota:** YouTube Data API requests consume project quota. Search only runs after explicit submission.
-- **Privacy:** Do not store passwords or sensitive account data in local storage. Firebase manages authentication credentials.
+## Project boundaries and privacy
 
-## Repository map
-
-| Path | Responsibility |
-|---|---|
-| `index.html` | App structure and dialogs |
-| `styles.css` | Desktop, mobile and player styling |
-| `app2.js` | Search, playback, library and playlists |
-| `auth.js` | Firebase sign-in and profile actions |
-| `firebase-config.js` | Firebase Web App config |
-| `api/search.js` | Server-side YouTube search |
-| `tests/` | Automated tests |
-| `assets/` | Brand and preview artwork |
-| `vercel.json` | Vercel routing/configuration |
+- **Music playback:** Playback is provided by YouTube's official embed. SONORA does not download audio or bypass YouTube restrictions.
+- **Third-party availability:** Video availability and embedding permissions are controlled by YouTube and the video owner.
+- **API quota:** YouTube Data API searches consume project quota. Search is submitted explicitly rather than on each typed character.
+- **Local data:** Signed-out library data is stored in the current browser's local storage.
+- **Cloud data:** Signed-in library data is stored in a Firestore document scoped to the Firebase Auth UID and protected by the included rules.
+- **Credentials:** Passwords are handled by Firebase Authentication. Keep API keys and private credentials out of source control.
 
 ## Roadmap
 
-- [ ] Firebase-backed cloud library and cross-device playlist sync.
-- [ ] Automated browser tests for critical user journeys.
-- [ ] Validate continuous playback across browser backgrounding on supported desktop and mobile browsers (browser/OS power policies may still pause embedded playback).
-- [ ] Playlist reorder and collaborative sharing.
-- [ ] Better search filters and recommendation controls.
-- [ ] Accessibility audit and performance budget.
-- [ ] Production screenshots and release notes.
+- [ ] End-to-end browser tests for sign-in, playback and library workflows.
+- [ ] Firestore rules emulator tests and stronger document validation.
+- [ ] Playlist reordering and sharing.
+- [ ] Better search filters and discovery controls.
+- [ ] Accessibility audit with keyboard and screen-reader testing.
+- [ ] Performance checks on lower-powered mobile devices.
+- [ ] More real-device playback testing across browsers.
+
+## Star history
+
+If you find the project interesting, consider giving the repository a star. The chart below tracks public GitHub stars over time; it will update as the repository receives stars.
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ansh44233/sonora-listening-room&type=date&legend=top-left)](https://www.star-history.com/#ansh44233/sonora-listening-room&type=date)
+
+[![GitHub stars](https://img.shields.io/github/stars/ansh44233/sonora-listening-room?style=social)](https://github.com/ansh44233/sonora-listening-room/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/ansh44233/sonora-listening-room?style=social)](https://github.com/ansh44233/sonora-listening-room/network/members)
 
 ## Contributing
 
-Issues and pull requests are welcome. For substantial changes, open an issue describing the user problem, proposed behavior and verification steps before submitting a pull request.
+Ideas, bug reports and pull requests are welcome. For larger changes, open an issue first with the user problem, proposed behavior and how the change can be verified.
 
-## License
+## Credits and license
 
-MIT. YouTube, Firebase and other third-party services remain subject to their respective terms, branding requirements and policies. See [YouTube API Services Terms](https://developers.google.com/youtube/terms/api-services-terms-of-service).
+Created as an independent project by [ansh44233](https://github.com/ansh44233).
+
+This repository is distributed under the MIT License. YouTube, Firebase, Vercel and all other third-party products and marks belong to their respective owners and remain subject to their terms and policies. See the [YouTube API Services Terms of Service](https://developers.google.com/youtube/terms/api-services-terms-of-service).
