@@ -83,7 +83,7 @@ if (configured) {
     console.error("SONORA auth setup:", error);
   }
 }
-$("#auth-trigger").addEventListener("click", () => auth?.currentUser ? (openAuth(), showMessage("Signed in as " + auth.currentUser.email + ". Use sign out below."), $("#auth-submit").hidden = true, $("#google-auth").hidden = true, $("#auth-form").hidden = true, $("#auth-forgot").hidden = true, $("#auth-switch").hidden = true, $("#auth-signout").hidden = false, $("#profile-editor").hidden = false, $("#profile-display-name").value = auth.currentUser.displayName || "") : (resetDialog(), openAuth()));
+$("#auth-trigger").addEventListener("click", () => auth?.currentUser ? (openAuth(), showMessage("Signed in as " + auth.currentUser.email + ". Use sign out below."), $("#auth-submit").hidden = true, $("#google-auth").hidden = true, $("#auth-form").hidden = true, $("#auth-forgot").hidden = true, $("#auth-switch").hidden = true, $("#auth-signout").hidden = false, $("#profile-editor").hidden = false, $("#profile-display-name").value = auth.currentUser.displayName || "", $("#account-email-note").textContent = auth.currentUser.email || "", showAccountTab("profile")) : (resetDialog(), openAuth()));
 function resetDialog() {
   $("#auth-submit").hidden = false; $("#google-auth").hidden = false; $("#auth-form").hidden = false;
   $("#auth-forgot").hidden = false; $("#auth-switch").hidden = false; $("#auth-signout").hidden = true; $("#profile-editor").hidden = true;
@@ -130,6 +130,11 @@ $("#auth-forgot").addEventListener("click", async () => {
   try { await sendPasswordResetEmail(auth, email); showMessage("Password reset email sent. Check your inbox."); }
   catch (error) { showMessage(friendlyError(error), true); }
 });
+function showAccountTab(tab) { const settings = tab === "settings"; $("#account-profile-panel").hidden = settings; $("#account-settings-panel").hidden = !settings; $("#account-tab-profile").classList.toggle("active", !settings); $("#account-tab-settings").classList.toggle("active", settings); }
+$("#account-tab-profile").addEventListener("click", () => showAccountTab("profile"));
+$("#account-tab-settings").addEventListener("click", () => showAccountTab("settings"));
+$("#setting-autoplay").checked = localStorage.getItem("sonora-autoplay-next") !== "false";
+$("#setting-autoplay").addEventListener("change", e => localStorage.setItem("sonora-autoplay-next", String(e.target.checked)));
 $("#profile-save").addEventListener("click", async () => { if (!auth?.currentUser) return; const name = $("#profile-display-name").value.trim(); if (!name) return showMessage("Enter a display name first.", true); try { await updateProfile(auth.currentUser, { displayName: name }); updateAccount(auth.currentUser); showMessage("Your profile has been updated."); } catch (error) { showMessage(friendlyError(error), true); } });
 const signout = document.createElement("button");
 signout.id = "auth-signout"; signout.className = "auth-submit"; signout.textContent = "Sign out"; signout.hidden = true;
