@@ -277,3 +277,19 @@
 .youtube-stage.is-minimized .youtube-stage-heading strong{max-width:175px;font-size:11px}
 .youtube-stage.is-minimized .youtube-stage-heading small{font-size:9px}
 @media(max-width:760px){.youtube-stage.is-minimized{left:auto!important;right:10px!important;bottom:calc(145px + env(safe-area-inset-bottom))!important;width:min(270px,calc(100vw - 20px))!important}}
+
+
+/* Final compact account control: keep the sign-in/profile chip subtle. */
+.topbar .account-entry{flex:0 0 auto;display:flex;align-items:center;gap:8px;max-width:174px;min-width:0;padding:5px 9px;border:1px solid var(--line);border-radius:999px;background:#ffffff0b;color:#eef1e9}
+.topbar .account-entry-avatar{width:24px;height:24px;min-width:24px;border-radius:50%;font-size:10px}
+.topbar .account-entry-copy{display:flex;flex-direction:column;min-width:0;text-align:left;line-height:1.2}
+.topbar .account-entry-copy b{max-width:104px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px}
+.topbar .account-entry-copy small{max-width:104px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:8px;color:#aab1a3}
+.topbar .account-entry-chevron{font-size:11px;color:#aab1a3}
+.topbar .account-entry.signed-in .account-entry-avatar{width:24px;height:24px;min-width:24px}
+@media(max-width:760px){
+ .topbar .account-entry{max-width:42px;width:42px;height:38px;justify-content:center;padding:4px;border-radius:12px}
+ .topbar .account-entry-copy,.topbar .account-entry-chevron{display:none}
+ .topbar .account-entry-avatar{width:25px;height:25px;min-width:25px}
+}
+@media(max-width:420px){.topbar{gap:7px}.topbar .account-entry{width:36px;max-width:36px;height:36px}}
