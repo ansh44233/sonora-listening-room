@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#151715">
+  <meta name="description" content="SONORA — a music space for finding your next favourite track.">
+  <title>SONORA — Music, in your own space</title>
+  <link rel="preconnect" href="https://itunes.apple.com">
+  <link rel="preconnect" href="https://is1-ssl.mzstatic.com">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="room">
+    <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+    <div class="app-shell">
+      <nav class="icon-rail" aria-label="Main navigation">
+        <a class="brand-mark" href="#" aria-label="Sonora home">s<span>.</span></a>
+        <button class="rail-btn active" data-view="home" aria-label="Home" title="Home">⌂</button>
+        <button class="rail-btn" data-view="search" aria-label="Search" title="Search">⌕</button>
+        <button class="rail-btn" data-view="library" aria-label="Your library" title="Your library">▤</button>
+        <button class="rail-btn" data-view="liked" aria-label="Liked songs" title="Liked songs">♡</button>
+        <div class="rail-bottom"><span class="status-dot"></span></div>
+      </nav>
+      <aside class="library-panel">
+        <div class="profile-card"><div class="avatar">S</div><div><strong>Music space</strong><small>Personal listening</small></div><span class="profile-menu">•••</span></div>
+        <div class="library-heading"><div><span class="line-icon">▥</span><strong>Your Library</strong></div><button class="quiet-btn" id="add-playlist" aria-label="Create playlist">＋</button></div>
+        <div class="chips"><button class="chip selected" data-filter="all">All</button><button class="chip" data-filter="liked">Liked</button><button class="chip" data-filter="recent">Recent</button></div>
+        <div class="library-tools"><span>YOUR COLLECTION</span><button id="sort-library">Recently added⌄</button></div>
+        <div class="library-list" id="library-list"><div class="empty-note">Your saved tracks will show up here.</div></div>
+        <div class="sidebar-foot"><span class="tiny-eq"><i></i><i></i><i></i></span> A little space for sound.</div>
+      </aside>
+      <main class="main-panel">
+        <header class="topbar"><div class="history-buttons"><button aria-label="Go back">‹</button><button aria-label="Go forward">›</button></div><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search songs, artists, albums..." autocomplete="off"><kbd>↵</kbd></label><button class="round-avatar" title="Your profile">S</button></header>
+        <section class="artist-hero" id="artist-hero">
+          <div class="hero-copy"><div class="verified"><span>✦</span> SONORA SELECTS</div><p class="eyebrow">A GOOD PLACE TO START</p><h1>Find your<br><em>next favourite.</em></h1><p class="hero-description">A softer corner of the internet, made for getting lost in music.</p><div class="hero-actions"><button class="primary-btn" id="play-featured"><span>▶</span> Play mix</button><button class="outline-btn" id="shuffle-featured">↝ Shuffle</button></div></div>
+          <div class="hero-art" aria-hidden="true"><div class="art-orbit orbit-a"></div><div class="art-orbit orbit-b"></div><div class="hero-disc"><div class="disc-label">S<span>.</span></div></div><div class="hero-sticker sticker-a">SIDE A<br><b>DAYDREAM</b></div><div class="hero-sticker sticker-b">SONORA<br>FM / 001</div></div>
+          <div class="hero-index">01 <span>/</span> 04</div>
+        </section>
+        <section class="content-section"><div class="section-heading"><div><p class="eyebrow">PICK YOUR MOOD</p><h2>Made for this moment</h2></div><button class="text-link" id="refresh-moods">Explore all <span>↗</span></button></div>
+          <div class="mood-grid"><button class="mood-card mood-lime" data-mood="indie"><span class="mood-number">01 / ALT</span><b>Indie<br>after hours</b><span class="mood-symbol">◒</span></button><button class="mood-card mood-blue" data-mood="chill"><span class="mood-number">02 / SLOW</span><b>Take it<br>slow</b><span class="mood-symbol">〰</span></button><button class="mood-card mood-orange" data-mood="pop"><span class="mood-number">03 / POP</span><b>On repeat<br>today</b><span class="mood-symbol">✳</span></button><button class="mood-card mood-pink" data-mood="focus"><span class="mood-number">04 / FOCUS</span><b>Headphones<br>on</b><span class="mood-symbol">⌁</span></button></div>
+        </section>
+        <section class="content-section tracks-section"><div class="section-heading"><div><p class="eyebrow">FRESH FINDS</p><h2 id="track-heading">In your rotation</h2></div><span class="result-count" id="result-count">CURATED FOR YOU</span></div><div class="track-table"><div class="track-head"><span>#</span><span>TRACK</span><span>ALBUM</span><span>TIME</span><span></span></div><div id="track-list"><div class="loading-state"><span class="loader"></span> Finding something good...</div></div></div></section>
+        <footer class="main-footer"><span>SONORA © 2026</span><span>MADE FOR THE LOVE OF LISTENING</span><span>PREVIEW AUDIO VIA APPLE MUSIC</span></footer>
+      </main>
+      <aside class="now-panel"><div class="now-top"><div><p class="eyebrow">UP NEXT</p><h3>On the other side</h3></div><span class="live-pill"><i></i> LIVE PREVIEWS</span></div><div class="feature-cover" id="feature-cover"><div class="cover-placeholder">S<span>.</span></div></div><div class="feature-meta"><div><strong id="feature-title">A little more music</strong><small id="feature-artist">Your next discovery awaits</small></div><button class="heart-btn" id="feature-like" aria-label="Like featured song">♡</button></div><div class="up-next-heading"><span>YOUR QUEUE</span><span id="queue-count">03 TRACKS</span></div><div id="queue-list" class="queue-list"></div><div class="note-card"><span class="note-icon">✳</span><div><b>Good sound, no rush.</b><p>SONORA plays short previews from the iTunes catalogue. Open a track on Apple Music to hear the full version.</p></div></div></aside>
+      <footer class="player-bar">
+        <div class="player-track"><div class="mini-cover" id="player-cover"><span>S.</span></div><div class="player-track-copy"><strong id="player-title">Choose a track</strong><small id="player-artist">SONORA RADIO</small></div><button class="heart-btn" id="player-like" aria-label="Like current song">♡</button></div>
+        <div class="player-controls"><div class="control-buttons"><button id="shuffle-btn" aria-label="Shuffle">⤨</button><button id="prev-btn" aria-label="Previous">◀</button><button class="play-button" id="play-btn" aria-label="Play">▶</button><button id="next-btn" aria-label="Next">▶</button><button id="repeat-btn" aria-label="Repeat">↻</button></div><div class="progress-row"><span id="current-time">0:00</span><input id="progress" type="range" min="0" max="30" value="0" aria-label="Track progress"><span id="duration">0:30</span></div></div>
+        <div class="player-extra"><span class="volume-icon">◖</span><input id="volume" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volume"><button id="open-apple" title="Open track on Apple Music">↗</button></div>
+      </footer>
+    </div>
+    <div class="room-caption"><span>SONORA / LISTENING ROOM</span><span>SCROLL TO EXPLORE&nbsp; ↓</span></div>
+  </div>
+  <audio id="audio" preload="none"></audio><div class="toast" id="toast" role="status"></div><script src="./app.js"></script>
+</body>
+</html>
