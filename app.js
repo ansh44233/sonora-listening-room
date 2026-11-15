@@ -203,7 +203,7 @@ function renderTracks() {
       <div class="track-info"><img src="${track.artworkUrl100}" alt="" loading="lazy"><div><b>${escapeHTML(track.trackName)}</b><small>${escapeHTML(track.artistName)}</small></div></div>
       <span class="track-album">${escapeHTML(track.collectionName)}</span>
       <span class="track-duration">${formatTime(track.durationMs / 1000)}</span>
-      <button class="row-like ${liked ? "liked" : ""}" data-like-id="${track.trackId}" aria-label="${liked ? "Remove from liked songs" : "Add to liked songs"}" aria-pressed="${liked}">${liked ? "♥" : "♡"}</button>
+      <button class="row-like ${liked ? "liked" : ""}" data-like-id="${track.trackId}" aria-label="${liked ? "Remove from liked songs" : "Add to liked songs"}" aria-pressed="${liked}">${liked ? "♥" : "♡"}</button><button class="row-add" data-add-track="${track.trackId}" aria-label="Add to playlist">＋</button>
     </div>`;
   }).join("") : '<div class="empty-state"><span>♫</span><b>Nothing to show just yet.</b><small>Search for a song or pick a mood to get started.</small></div>';
 
@@ -295,6 +295,22 @@ function goHistory(direction) {
 }
 
 document.addEventListener("click", event => {
+  const addTrack = event.target.closest("[data-add-track]");
+  if (addTrack) {
+    const track = state.tracks.find(item => item.trackId === Number(addTrack.dataset.addTrack));
+    if (!track) return;
+    const name = window.prompt("Add this song to a playlist. Enter a playlist name:");
+    if (!name?.trim()) return;
+    let playlist = state.playlists.find(item => item.name.toLowerCase() === name.trim().toLowerCase());
+    if (!playlist) {
+      playlist = { id: `pl-${Date.now()}`, name: name.trim().slice(0, 36), trackIds: [] };
+      state.playlists.unshift(playlist);
+    }
+    if (!playlist.trackIds.includes(track.trackId)) playlist.trackIds.push(track.trackId);
+    if (!state.liked.some(item => item.trackId === track.trackId) && !state.recent.some(item => item.trackId === track.trackId)) state.recent.unshift(track);
+    saveState(); renderLibrary(); toast(`Added to ${playlist.name}.`); return;
+  }
+
   const like = event.target.closest("[data-like-id]");
   if (like) {
     const track = state.tracks.find(item => item.trackId === Number(like.dataset.likeId));
