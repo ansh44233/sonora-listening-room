@@ -1,0 +1,9 @@
+{
+  "name": "sonora-listening-room",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  },
+  "description": "Music discovery with official YouTube embedded playback."
+}
