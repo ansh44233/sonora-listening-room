@@ -45,3 +45,41 @@
 #youtube-player{width:100%;aspect-ratio:16/9;min-height:200px;background:#080908;border-radius:10px;overflow:hidden}#youtube-player iframe{width:100%;height:100%;border:0}
 .youtube-stage-note{font-size:9px;line-height:1.5;color:#9ea69a;margin:10px 2px 0}
 @media(max-width:760px){.youtube-stage{left:12px;right:12px;bottom:154px;width:auto;padding:10px}.youtube-stage-head strong{max-width:calc(100vw - 100px)}#youtube-player{min-height:200px}}
+
+/* SONORA refinement: movable player + account experience */
+.youtube-stage{touch-action:auto;user-select:none}
+.youtube-stage-head{cursor:grab;touch-action:none;min-height:30px}
+.youtube-stage-head:active{cursor:grabbing}
+.youtube-stage-heading{display:flex;align-items:center;gap:9px;min-width:0}
+.youtube-stage-heading>div{min-width:0}
+.drag-grip{display:grid;place-items:center;width:25px;height:28px;border:1px solid #ffffff22;border-radius:8px;color:#c7d2b8;font-size:18px;flex:none}
+#youtube-player{user-select:auto}
+.auth-backdrop{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:18px;background:#050705c9;backdrop-filter:blur(12px)}
+.auth-backdrop[hidden]{display:none}
+.auth-dialog{position:relative;width:min(430px,100%);padding:34px;border:1px solid #ffffff24;border-radius:24px;background:linear-gradient(145deg,#242a22,#121612);box-shadow:0 28px 100px #000b;color:#f3f4ef}
+.auth-close{position:absolute;right:17px;top:15px;width:32px;height:32px;border:1px solid #ffffff20;border-radius:50%;background:#ffffff0c;color:#f3f4ef;font-size:22px}
+.auth-brand{display:flex;align-items:center;gap:10px;margin-bottom:29px;color:#aeb5a8;font:8px var(--mono);letter-spacing:.12em}
+.auth-logo{font:800 30px var(--display);letter-spacing:-.1em;color:#f4f6ee}.auth-logo span{color:var(--lime)}
+.auth-dialog>.eyebrow{color:var(--lime);margin-bottom:9px}
+.auth-dialog h2{font:800 29px/1.05 var(--display);letter-spacing:-.06em;margin:0}
+.auth-subtitle{font-size:12px;color:#a9b0a3;line-height:1.5;margin:10px 0 22px}
+.google-auth,.auth-submit{width:100%;height:45px;border-radius:12px;font-size:12px;font-weight:700}
+.google-auth{border:1px solid #ffffff2b;background:#f2f3ed;color:#1b2019;display:flex;align-items:center;justify-content:center;gap:10px}
+.google-g{font:800 17px Arial;color:#4285f4}
+.auth-divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:#858e80;font:8px var(--mono);white-space:nowrap}
+.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#ffffff1b;flex:1}
+.auth-label{display:block;margin:12px 0 6px;color:#cbd1c5;font-size:10px}
+.auth-dialog input{width:100%;height:43px;border:1px solid #ffffff22;border-radius:10px;background:#090c09;color:#f5f6f1;padding:0 12px;outline:none;font-size:12px}
+.auth-dialog input:focus{border-color:var(--lime);box-shadow:0 0 0 3px #a6d52b20}
+.auth-dialog input[hidden],.auth-label[hidden]{display:none}
+.auth-submit{margin-top:18px;border:0;background:var(--lime);color:#17200e}
+.auth-text-btn,.auth-switch button{border:0;background:none;color:#c9e77a;font-size:10px}
+.auth-text-btn{display:block;margin:13px auto 0}
+.auth-switch{text-align:center;color:#aab1a4;font-size:10px;margin:17px 0 0}
+.auth-switch button{font-weight:700}
+.auth-message{min-height:16px;margin:12px 0 0;text-align:center;color:#c9e77a;font-size:10px;line-height:1.5}
+.auth-message.error{color:#f0a0a0}
+.auth-legal{margin:17px 0 0;text-align:center;color:#778073;font-size:9px;line-height:1.5}
+.round-avatar.signed-in{background:#e8f0d8;color:#192014;overflow:hidden}
+.round-avatar.signed-in img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+@media(max-width:760px){.auth-dialog{padding:27px 22px}.youtube-stage{max-height:calc(100dvh - 170px);overflow:auto}.youtube-stage-head{position:sticky;top:0;background:#171b16;z-index:1}}
