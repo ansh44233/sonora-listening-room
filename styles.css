@@ -271,7 +271,7 @@
 /* Persistent mini-player: keep the YouTube iframe mounted when minimized. */
 .youtube-stage.is-minimized{width:280px!important;min-height:0;padding:9px 11px;border-radius:14px}
 .youtube-stage.is-minimized .youtube-stage-head{margin:0;min-height:34px}
-.youtube-stage.is-minimized #youtube-player{position:absolute;left:-10000px;top:0;width:480px;height:270px;min-height:270px;opacity:.01;pointer-events:none}
+.youtube-stage.is-minimized #youtube-player{position:fixed;left:0;top:0;width:480px;height:270px;min-height:270px;clip-path:inset(50%);opacity:.01;pointer-events:none}
 .youtube-stage.is-minimized .youtube-stage-note{display:none}
 .youtube-stage.is-minimized .youtube-stage-heading .eyebrow,.youtube-stage.is-minimized .drag-grip{display:none}
 .youtube-stage.is-minimized .youtube-stage-heading strong{max-width:175px;font-size:11px}
