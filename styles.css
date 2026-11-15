@@ -25,3 +25,14 @@
 .empty-state small{font-size:10px;color:#969e91}
 .empty-state.error>span{background:#d98c8c22;color:#e5a0a0}
 #open-apple:disabled{opacity:.35;cursor:not-allowed}
+
+/* The track list has two independent actions: save a favourite or file it away. */
+.track-head,.track-row{grid-template-columns:25px minmax(120px,1.7fr) minmax(75px,1fr) 38px 22px 22px}
+.row-add{border:0;background:transparent;color:#aab0a5;font-size:16px;padding:0}
+.row-add:hover{color:var(--lime)}
+.row-like:hover{color:var(--lime)}
+.library-item,.queue-item{width:100%;border:0;text-align:left;background:transparent;color:inherit;font:inherit;padding:4px;border-radius:8px}
+.library-item:hover,.queue-item:hover{background:#ffffff12}
+.library-item span,.queue-item span{min-width:0}
+.library-item:focus-visible,.queue-item:focus-visible,.track-row:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.playlist-cover{width:40px;height:40px;border-radius:7px;background:#a6d52b;color:#18200f;display:grid;place-items:center;font-size:20px}
