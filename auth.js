@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, updateProfile, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 
 const $ = (s) => document.querySelector(s);
@@ -7,7 +8,7 @@ const modal = $("#auth-backdrop");
 const form = $("#auth-form");
 const message = $("#auth-message");
 let mode = "signin";
-let auth = null;
+let auth = null;\nlet db = null;\nlet cloudSyncReady = false;\nlet cloudWriteQueue = Promise.resolve();
 let configured = Boolean(firebaseConfig.apiKey && !firebaseConfig.apiKey.includes("PASTE_") && firebaseConfig.projectId && !firebaseConfig.projectId.includes("YOUR_"));
 
 function showMessage(text, error = false) {
@@ -182,4 +183,20 @@ window.addEventListener("resize", () => {
     stage.style.left = Math.max(8, Math.min(innerWidth - stage.offsetWidth - 8, r.left)) + "px";
     stage.style.top = Math.max(8, Math.min(innerHeight - stage.offsetHeight - 8, r.top)) + "px";
   }
+});
+
+
+window.addEventListener("sonora:library-change", (event) => {
+  const user = auth?.currentUser;
+  if (!user || !db || !cloudSyncReady) return;
+  const data = event.detail || {};
+  cloudWriteQueue = cloudWriteQueue.then(() => setDoc(doc(db,"sonoraLibraries",user.uid),{
+    liked:Array.isArray(data.liked)?data.liked.slice(0,100):[],
+    recent:Array.isArray(data.recent)?data.recent.slice(0,60):[],
+    playlists:Array.isArray(data.playlists)?data.playlists:[],
+    updatedAt:new Date().toISOString()
+  },{merge:true})).catch(error => {
+    console.error("SONORA cloud library save:",error);
+    showMessage("Couldn't save your library to the cloud. Your local copy is safe.",true);
+  });
 });
