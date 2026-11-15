@@ -56,13 +56,13 @@ function friendlyError(error) {
 function updateAccount(user) {
   const trigger = $("#auth-trigger");
   if (!user) {
-    trigger.textContent = "S";
+    trigger.innerHTML = '<span class="account-entry-avatar">S</span><span class="account-entry-copy"><b id="account-entry-title">Sign in</b><small id="account-entry-subtitle">Your SONORA account</small></span><span class="account-entry-chevron">⌄</span>';
     trigger.classList.remove("signed-in");
     trigger.title = "Sign in";
     trigger.setAttribute("aria-label", "Sign in");
     return;
   }
-  trigger.textContent = (user.displayName || user.email || "S").slice(0,1).toUpperCase();
+  trigger.innerHTML = '<span class="account-entry-avatar">' + (user.displayName || user.email || "S").slice(0,1).toUpperCase() + '</span><span class="account-entry-copy"><b>' + (user.displayName || "My account").replace(/[&<>"]/g, "") + '</b><small>View profile · ' + (user.email || "").replace(/[&<>"]/g, "") + '</small></span><span class="account-entry-chevron">⌄</span>';
   trigger.classList.add("signed-in");
   trigger.title = user.email || "Account";
   trigger.setAttribute("aria-label", "Account: " + (user.email || "signed in"));
@@ -83,10 +83,10 @@ if (configured) {
     console.error("SONORA auth setup:", error);
   }
 }
-$("#auth-trigger").addEventListener("click", () => auth?.currentUser ? (openAuth(), showMessage("Signed in as " + auth.currentUser.email + ". Use sign out below."), $("#auth-submit").hidden = true, $("#google-auth").hidden = true, $("#auth-form").hidden = true, $("#auth-forgot").hidden = true, $("#auth-switch").hidden = true, $("#auth-signout").hidden = false) : (resetDialog(), openAuth()));
+$("#auth-trigger").addEventListener("click", () => auth?.currentUser ? (openAuth(), showMessage("Signed in as " + auth.currentUser.email + ". Use sign out below."), $("#auth-submit").hidden = true, $("#google-auth").hidden = true, $("#auth-form").hidden = true, $("#auth-forgot").hidden = true, $("#auth-switch").hidden = true, $("#auth-signout").hidden = false, $("#profile-editor").hidden = false, $("#profile-display-name").value = auth.currentUser.displayName || "") : (resetDialog(), openAuth()));
 function resetDialog() {
   $("#auth-submit").hidden = false; $("#google-auth").hidden = false; $("#auth-form").hidden = false;
-  $("#auth-forgot").hidden = false; $("#auth-switch").hidden = false; $("#auth-signout").hidden = true;
+  $("#auth-forgot").hidden = false; $("#auth-switch").hidden = false; $("#auth-signout").hidden = true; $("#profile-editor").hidden = true;
 }
 $("#auth-close").addEventListener("click", closeAuth);
 modal.addEventListener("click", (e) => { if (e.target === modal) closeAuth(); });
@@ -130,6 +130,7 @@ $("#auth-forgot").addEventListener("click", async () => {
   try { await sendPasswordResetEmail(auth, email); showMessage("Password reset email sent. Check your inbox."); }
   catch (error) { showMessage(friendlyError(error), true); }
 });
+$("#profile-save").addEventListener("click", async () => { if (!auth?.currentUser) return; const name = $("#profile-display-name").value.trim(); if (!name) return showMessage("Enter a display name first.", true); try { await updateProfile(auth.currentUser, { displayName: name }); updateAccount(auth.currentUser); showMessage("Your profile has been updated."); } catch (error) { showMessage(friendlyError(error), true); } });
 const signout = document.createElement("button");
 signout.id = "auth-signout"; signout.className = "auth-submit"; signout.textContent = "Sign out"; signout.hidden = true;
 signout.addEventListener("click", async () => { try { await signOut(auth); closeAuth(); resetDialog(); } catch (error) { showMessage(friendlyError(error), true); } });
