@@ -293,3 +293,12 @@
  .topbar .account-entry-avatar{width:25px;height:25px;min-width:25px}
 }
 @media(max-width:420px){.topbar{gap:7px}.topbar .account-entry{width:36px;max-width:36px;height:36px}}
+
+
+/* Mini-player docking fix: ignore stale drag coordinates while minimized. */
+.youtube-stage.is-minimized{position:fixed!important;left:auto!important;top:auto!important;right:22px!important;bottom:112px!important;width:min(350px,calc(100vw - 32px))!important;max-width:calc(100vw - 32px);box-sizing:border-box;z-index:45}
+.youtube-stage.is-minimized .youtube-stage-heading{min-width:0;flex:1}
+.youtube-stage.is-minimized .youtube-stage-heading>div{min-width:0;max-width:100%}
+.youtube-stage.is-minimized .youtube-stage-heading strong{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.youtube-stage.is-minimized .youtube-stage-actions{flex:none}
+@media(max-width:760px){.youtube-stage.is-minimized{left:auto!important;right:12px!important;top:auto!important;bottom:calc(145px + env(safe-area-inset-bottom))!important;width:min(350px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)}}
