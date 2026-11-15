@@ -230,3 +230,14 @@
  .hero-art{right:-110px;opacity:.35}
  .control-buttons{gap:8px}
 }
+
+/* Keep the feature panel unmistakably SONORA-branded; third-party thumbnails stay in results and queue. */
+.feature-cover{position:relative;isolation:isolate;background:linear-gradient(145deg,#b8df49 0%,#8eb72e 42%,#202b1d 100%)}
+.feature-cover:before,.feature-cover:after{content:"";position:absolute;border:1px solid #ffffff42;border-radius:50%;width:78%;aspect-ratio:1;right:-12%;top:-25%;z-index:-1}
+.feature-cover:after{width:55%;right:8%;top:40%;border-color:#ffffff25}
+.feature-cover .sonora-feature-art{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:15px;color:#1c2813}
+.feature-art-kicker,.feature-art-caption{font:8px var(--mono);letter-spacing:.14em;font-weight:700}
+.feature-art-vinyl{align-self:center;width:66%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:repeating-radial-gradient(circle,#151a15 0 2px,#343b30 3px 5px,#1e241b 6px 8px);box-shadow:0 12px 30px #18210d70;transform:rotate(-17deg)}
+.feature-art-vinyl>span{display:grid;place-items:center;width:31%;aspect-ratio:1;border-radius:50%;background:#c6e75c;color:#18220f;font:800 20px var(--display)}
+.feature-art-vinyl>span span{color:#fff}
+.feature-art-caption{align-self:flex-end;color:#f2f5e8}
