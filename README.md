@@ -1,183 +1,115 @@
 <div align="center">
 
-  <img src="assets/preview.svg" alt="SONORA listening room interface artwork" width="100%" />
+  <img src="assets/preview.svg" alt="SONORA listening room artwork" width="100%" />
 
   <h1>SONORA</h1>
-  <p><strong>A quieter place to find your next favourite track.</strong></p>
-  <p>A music discovery and preview player with a spatial listening-room interface, live catalogue search and a minimal, tactile playback experience.</p>
-
-  <p>
-    <a href="https://github.com/ansh44233/sonora-listening-room"><img src="https://img.shields.io/badge/status-in%20development-b5d94a?style=flat-square&labelColor=171b16" alt="Project status"></a>
-    <img src="https://img.shields.io/badge/HTML5-structure-ea8b55?style=flat-square&logo=html5&logoColor=white" alt="HTML5">
-    <img src="https://img.shields.io/badge/CSS3-interface-7da9d8?style=flat-square&logo=css3&logoColor=white" alt="CSS3">
-    <img src="https://img.shields.io/badge/JavaScript-vanilla-f0d66b?style=flat-square&logo=javascript&logoColor=171717" alt="JavaScript">
-    <img src="https://img.shields.io/badge/API-Apple%20iTunes-aaa?style=flat-square&logo=apple&logoColor=white" alt="Apple iTunes Search API">
-    <img src="https://img.shields.io/badge/license-MIT-b5d94a?style=flat-square" alt="MIT license">
-  </p>
-
-  <p>
-    <a href="#-experience">Experience</a> ·
-    <a href="#-features">Features</a> ·
-    <a href="#-how-it-works">How it works</a> ·
-    <a href="#-run-locally">Run locally</a> ·
-    <a href="#-deployment">Deployment</a>
-  </p>
-
+  <p><strong>A listening room for discovering the next track.</strong></p>
+  <p>Search YouTube's embeddable music videos and play them in the official YouTube player, inside a focused music-library interface.</p>
+  <p><img src="https://img.shields.io/badge/JavaScript-vanilla-f0d66b?style=flat-square&logo=javascript&logoColor=171717" alt="JavaScript"> <img src="https://img.shields.io/badge/Node.js-serverless-43853d?style=flat-square&logo=node.js&logoColor=white" alt="Node.js"> <img src="https://img.shields.io/badge/API-YouTube%20Data%20API%20v3-red?style=flat-square&logo=youtube&logoColor=white" alt="YouTube API"> <img src="https://img.shields.io/badge/Player-YouTube%20IFrame%20API-red?style=flat-square&logo=youtube&logoColor=white" alt="YouTube Player"> <img src="https://img.shields.io/badge/Deploy-Vercel-black?style=flat-square&logo=vercel" alt="Vercel"></p>
 </div>
 
 ---
 
-## The idea
+## The product
 
-Music apps can make listening feel like managing a dashboard. SONORA takes a different direction: a calm, dark listening space where discovery, artwork and playback live together.
+SONORA brings music discovery, a personal library and playback into one listening room. Search is powered by the YouTube Data API v3. Playback uses the official YouTube IFrame Player API, allowing eligible videos to play in full through YouTube's embedded player.
 
-The project is built with plain HTML, CSS and JavaScript. It uses the Apple iTunes Search API to find catalogue entries and play the preview audio URLs returned for eligible tracks.
-
-> **What SONORA is:** a music discovery interface and preview player.  
-> **What it isn't:** a music-hosting service or a replacement for a full streaming subscription.
-
-## ✦ Experience
-
-The interface is organised around three areas:
-
-| Area | Purpose |
-| --- | --- |
-| **Your Library** | A compact space for liked tracks saved in the current browser. |
-| **Listening Room** | Search, explore mood-based queries and browse matching tracks. |
-| **Now Playing** | Artwork, queue preview and the current listening controls. |
-
-The artwork above is an illustrative project visual, not a captured browser screenshot.
+**No audio extraction, stream proxying, ad removal or playback restriction bypassing.** YouTube's player, controls and content policies remain in charge.
 
 ## Features
 
-- **Catalogue search** — search by artist, song or album through the iTunes Search API.
-- **Preview playback** — play and pause the preview URL returned for a track.
-- **Playback controls** — previous, next, shuffle, repeat, volume and seek.
-- **Liked tracks** — save and remove favourites using browser local storage.
-- **Mood discovery** — quick searches for indie, chill, pop and focus listening.
-- **Queue view** — see other tracks from the current result set.
-- **Apple Music hand-off** — open the catalogue listing to continue listening there.
-- **Responsive layout** — dedicated desktop and mobile layouts.
-- **Reduced-motion support** — respects the operating system's reduced-motion preference.
+- YouTube video search through a server-side API route.
+- Full-length playback for videos that permit embedding and are available in the user's region.
+- Official YouTube player controls and branding.
+- Play, pause, seek, volume, next, previous, shuffle and repeat.
+- Liked tracks and recently played library saved in browser storage.
+- Mood-based discovery for indie, chill, pop and focus.
+- Queue preview and responsive listening-room layout.
+- API key kept in Vercel environment variables, not browser JavaScript.
+- Strict SafeSearch and embeddable-video filtering.
 
-Some interface elements are presentation-only or placeholders. Playlist creation, for example, is not implemented yet.
+## Playback availability
 
-## Built with
+Not every result can play in an embed. Video owners can disable embedding, and videos may be region-restricted, private, age-restricted or removed. If a result cannot play, choose another. Playback behavior and ads are controlled by YouTube.
 
-| Technology | Role |
-| --- | --- |
-| HTML5 | Page structure and accessible controls |
-| CSS3 | Responsive layout, glass effects, motion and visual system |
-| Vanilla JavaScript | Search, player state, rendering and interactions |
-| Apple iTunes Search API | Track metadata, artwork and preview URLs |
-| HTMLAudioElement | Browser audio playback |
-| localStorage | Persist liked track IDs in the current browser |
-| Vercel | Static deployment target |
+## Architecture
 
-No API key or backend service is required for the current search flow.
+Browser → GET /api/search?q=... → Vercel serverless function → YouTube Data API v3 (search.list + videos.list) → normalized video results → YouTube IFrame Player API → official embedded playback.
 
-## How it works
+## Stack
 
-```text
-User searches or picks a mood
-            |
-            v
-  iTunes Search API request
-            |
-            v
- Filter results with preview URLs
-            |
-            v
- Render tracks, artwork and queue
-            |
-            v
- HTMLAudioElement plays preview
-            |
-            v
- Liked track IDs saved locally
-```
-
-### Data and privacy notes
-
-- Search requests go directly from the browser to Apple's public iTunes Search endpoint.
-- SONORA does not upload, host or download audio.
-- Liked track IDs are stored in the browser's `localStorage`; they are not synced across devices.
-- Track names, artwork, preview availability and Apple Music links come from the external catalogue.
-- Preview clips are samples, not guaranteed full-length tracks. Availability can vary by catalogue entry and region.
+| Layer | Technology |
+|---|---|
+| Frontend | HTML, CSS, vanilla JavaScript |
+| Search | YouTube Data API v3 |
+| Backend | Vercel Node.js function |
+| Playback | YouTube IFrame Player API |
+| Persistence | Browser localStorage |
+| Tests | Node.js built-in test runner |
 
 ## Project structure
 
-```text
-sonora-listening-room/
-├── assets/
-│   └── preview.svg       # Illustrative project artwork
-├── app.js                # Search, player state and UI rendering
-├── index.html            # Main application structure
-├── styles.css            # Visual system and responsive layouts
-├── vercel.json           # Static deployment configuration
-├── LICENSE
-└── README.md
-```
+- api/search.js — server-side YouTube search and metadata
+- assets/preview.svg — project artwork
+- tests/search.test.js — duration parsing test
+- app2.js — current YouTube player and UI state
+- app.js — previous Apple preview implementation; not loaded
+- index.html — application markup
+- styles.css — responsive interface
+- package.json — project scripts
+- .env.example — required environment variable
+- vercel.json — Vercel configuration
 
-## Run locally
+## Setup
 
-You only need a modern browser and a local static server. There is no build step and no package installation.
+1. Create a project in Google Cloud Console.
+2. Enable **YouTube Data API v3** and create an API key. Restrict the key to this API.
+3. Copy .env.example to .env.local and set the variable YOUTUBE_API_KEY to your key.
+4. Install Vercel CLI and run:
 
-```bash
-git clone https://github.com/ansh44233/sonora-listening-room.git
-cd sonora-listening-room
-python -m http.server 4173
-```
+    npm install
+    npx vercel dev
 
-Then open **http://localhost:4173**.
-
-You can also use the VS Code Live Server extension or another static file server.
+Open the local URL printed by Vercel CLI. Opening the HTML file directly will not run the serverless search route.
 
 ## Deployment
 
-SONORA is a static site and can be deployed directly to Vercel.
+1. Import the repository into Vercel.
+2. Add YOUTUBE_API_KEY in Project Settings → Environment Variables for Preview and Production.
+3. Redeploy after saving the variable.
+4. Search for a track and test playback in the official YouTube player.
 
-1. Import this repository in [Vercel](https://vercel.com/new).
-2. Select **Other** as the framework preset.
-3. Leave the build command and output directory empty/default for a root-level static site.
-4. Deploy.
+No frontend build command is required. The /api/search route runs as a Vercel Node.js function.
 
-Every push to the connected production branch can trigger a new deployment.
+## Testing
+
+Run 'npm test'. The included unit test checks ISO-8601 video duration parsing. It does not replace browser testing of actual YouTube playback, which depends on each video's embed permissions and availability.
 
 ## Current scope
 
-| Area | Status |
-| --- | --- |
-| Search catalogue | Implemented |
-| Preview audio playback | Implemented |
-| Player controls | Implemented |
-| Like / unlike tracks | Implemented |
-| Browser-local persistence | Implemented |
-| Mood-based discovery | Implemented |
-| Responsive styling | Implemented |
-| Playlist creation | Not implemented |
-| Account login / cloud sync | Not implemented |
-| Full-length streaming | Not provided |
+- Search and YouTube embedded playback: implemented in the current frontend/backend code.
+- Liked and recently played tracks: persisted locally in this browser.
+- Playlist creation and editing: not yet implemented.
+- Account login and cross-device sync: not implemented.
+- Automated browser playback tests: not yet implemented.
+
+## Limits and configuration
+
+- Search region: India (IN).
+- SafeSearch: strict.
+- Search results: up to 25 embeddable videos.
+- YouTube Data API quota applies; successful search responses are briefly cached.
+- Liked and recent items stay in this browser and are not synced to an account.
+- A YouTube API key is required for catalogue search.
 
 ## Roadmap
 
-- [ ] Add automated tests for search and playback state.
-- [ ] Improve keyboard navigation and screen-reader announcements.
-- [ ] Add a proper playlist model and playlist editing.
-- [ ] Add persistent search history.
-- [ ] Capture real desktop and mobile screenshots after browser QA.
-- [ ] Add CI checks for formatting and basic regression tests.
-
-## Contributing
-
-Ideas, bug reports and improvements are welcome. For larger changes, open an issue first so the scope can be discussed before a pull request.
+- [ ] Playlist creation, rename, delete and reorder.
+- [ ] Browser end-to-end tests for search and playback.
+- [ ] Improved keyboard and screen-reader support.
+- [ ] Recovery flow for removed or blocked videos.
+- [ ] Real desktop and mobile screenshots after browser QA.
 
 ## License
 
-Released under the [MIT License](LICENSE).
-
----
-
-<div align="center">
-  <sub>Designed and built as an independent front-end project. Made for the love of listening.</sub>
-</div>
+MIT. YouTube APIs, the embedded player and all video content remain subject to Google's and YouTube's terms and policies.
