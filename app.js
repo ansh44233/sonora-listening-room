@@ -1,5 +1,5 @@
-const audio = $("#audio");
 const $ = (selector) => document.querySelector(selector);
+const audio = $("#audio");
 const STORAGE = { liked: "sonora-liked-v3", recent: "sonora-recent-v3", playlists: "sonora-playlists-v1" };
 
 function readStore(key, fallback = []) {
