@@ -1,3 +1,4 @@
+<div align="center">
 <h1>SONORA</h1>
   <p><strong>Find your sound. Make room for music.</strong></p>
   <p>A personal music-discovery and listening-room web app — built from scratch with vanilla JavaScript, YouTube's official player, Firebase Authentication and Cloud Firestore.</p>
