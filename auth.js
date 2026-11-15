@@ -70,7 +70,6 @@ function updateAccount(user) {
   trigger.classList.add("signed-in");
   trigger.title = user.email || "Account";
   trigger.setAttribute("aria-label", "Account: " + (user.email || "signed in"));
-  if (user.photoURL) trigger.innerHTML = '<img src="' + user.photoURL.replace(/&/g,"&amp;").replace(/"/g,"&quot;") + '" alt="">';
 }
 if (configured) {
   try {
