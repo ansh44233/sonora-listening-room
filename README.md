@@ -35,6 +35,8 @@ The interface combines a curated-feeling home screen, mood shortcuts, searchable
 
 ### Listen
 - Play and pause, skip tracks, seek and adjust volume.
+- In-app navigation keeps the YouTube player mounted; switching between Home, Search and Library does not intentionally restart the current track.
+- Minimize collapses the player controls without removing the embedded player, helping preserve ongoing playback.
 - Shuffle and repeat controls.
 - Movable YouTube playback stage with minimize, restore and close actions.
 - Compact playback bar and responsive mobile layout.
@@ -203,6 +205,7 @@ Suggested release checklist:
 
 - [ ] Firebase-backed cloud library and cross-device playlist sync.
 - [ ] Automated browser tests for critical user journeys.
+- [ ] Validate continuous playback across browser backgrounding on supported desktop and mobile browsers (browser/OS power policies may still pause embedded playback).
 - [ ] Playlist reorder and collaborative sharing.
 - [ ] Better search filters and recommendation controls.
 - [ ] Accessibility audit and performance budget.
