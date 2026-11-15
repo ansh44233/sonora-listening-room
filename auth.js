@@ -8,7 +8,10 @@ const modal = $("#auth-backdrop");
 const form = $("#auth-form");
 const message = $("#auth-message");
 let mode = "signin";
-let auth = null;\nlet db = null;\nlet cloudSyncReady = false;\nlet cloudWriteQueue = Promise.resolve();
+let auth = null;
+let db = null;
+let cloudSyncReady = false;
+let cloudWriteQueue = Promise.resolve();
 let configured = Boolean(firebaseConfig.apiKey && !firebaseConfig.apiKey.includes("PASTE_") && firebaseConfig.projectId && !firebaseConfig.projectId.includes("YOUR_"));
 
 function showMessage(text, error = false) {
@@ -73,8 +76,31 @@ if (configured) {
   try {
     const app = initializeApp(firebaseConfig);
     auth = getAuth(app);
-    onAuthStateChanged(auth, (user) => {
+    db = getFirestore(app);
+    onAuthStateChanged(auth, async (user) => {
+      cloudSyncReady = false;
       updateAccount(user);
+      if (user) {
+        try {
+          const ref = doc(db, "sonoraLibraries", user.uid);
+          const snap = await getDoc(ref);
+          const local = {
+            liked: JSON.parse(localStorage.getItem("sonora-liked-yt-v1") || "[]"),
+            recent: JSON.parse(localStorage.getItem("sonora-recent-yt-v1") || "[]"),
+            playlists: JSON.parse(localStorage.getItem("sonora-playlists-v1") || "[]")
+          };
+          const remote = snap.exists() ? snap.data() : {};
+          const mergeTracks = (a,b) => [...(Array.isArray(a)?a:[]),...(Array.isArray(b)?b:[])].filter((x,i,all)=>x && (x.videoId||x.trackId) && all.findIndex(y=>(y.videoId||y.trackId)===(x.videoId||x.trackId))===i).slice(0,100);
+          const playlists = [...(Array.isArray(remote.playlists)?remote.playlists:[]),...local.playlists].filter((p,i,a)=>p && p.id && a.findIndex(x=>x.id===p.id)===i);
+          const merged = {liked:mergeTracks(remote.liked,local.liked),recent:mergeTracks(remote.recent,local.recent).slice(0,60),playlists};
+          if (snap.exists()) window.dispatchEvent(new CustomEvent("sonora:cloud-library",{detail:merged}));
+          cloudSyncReady = true;
+          await setDoc(ref,{...merged,updatedAt:new Date().toISOString()},{merge:true});
+        } catch (error) {
+          console.error("SONORA cloud library sync:",error);
+          showMessage("Signed in, but cloud library sync is unavailable. Check Firestore setup and rules.",true);
+        }
+      }
       if (user && !user.emailVerified && user.providerData.some(p => p.providerId === "password")) {
         showMessage("Check your inbox for the SONORA verification email.");
       }
