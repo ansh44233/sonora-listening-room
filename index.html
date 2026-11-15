@@ -32,7 +32,7 @@
         <div class="sidebar-foot"><span class="tiny-eq"><i></i><i></i><i></i></span> A little space for sound.</div>
       </aside>
       <main class="main-panel">
-        <header class="topbar"><div class="history-buttons"><button aria-label="Go back">‹</button><button aria-label="Go forward">›</button></div><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search songs, artists, albums..." autocomplete="off"><kbd>↵</kbd></label><button class="round-avatar auth-trigger" id="auth-trigger" title="Sign in" aria-label="Sign in">S</button></header>
+        <header class="topbar"><div class="history-buttons"><button aria-label="Go back">‹</button><button aria-label="Go forward">›</button></div><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search songs, artists, albums..." autocomplete="off"><kbd>↵</kbd></label><button class="account-entry auth-trigger" id="auth-trigger" title="Sign in" aria-label="Sign in"><span class="account-entry-avatar">S</span><span class="account-entry-copy"><b id="account-entry-title">Sign in</b><small id="account-entry-subtitle">Your SONORA account</small></span><span class="account-entry-chevron">⌄</span></button></header>
         <section class="artist-hero" id="artist-hero">
           <div class="hero-copy"><div class="verified"><span>✦</span> SONORA SELECTS</div><p class="eyebrow">A GOOD PLACE TO START</p><h1>Find your<br><em>next favourite.</em></h1><p class="hero-description">A softer corner of the internet, made for getting lost in music.</p><div class="hero-actions"><button class="primary-btn" id="play-featured"><span>▶</span> Play mix</button><button class="outline-btn" id="shuffle-featured">↝ Shuffle</button></div></div>
           <div class="hero-art" aria-hidden="true"><div class="art-orbit orbit-a"></div><div class="art-orbit orbit-b"></div><div class="hero-disc"><div class="disc-label">S<span>.</span></div></div><div class="hero-sticker sticker-a">SIDE A<br><b>DAYDREAM</b></div><div class="hero-sticker sticker-b">SONORA<br>FM / 001</div></div>
@@ -53,7 +53,7 @@
     </div>
     <div class="room-caption"><span>SONORA / LISTENING ROOM</span><span>SCROLL TO EXPLORE&nbsp; ↓</span></div>
   </div>
-  <section class="youtube-stage" id="youtube-stage" aria-label="Movable YouTube player" hidden><div class="youtube-stage-head" id="youtube-stage-drag"><div class="youtube-stage-heading"><span class="drag-grip" aria-hidden="true">⠿</span><div><p class="eyebrow">NOW PLAYING · YOUTUBE</p><strong id="youtube-stage-title">Choose a track</strong><small id="youtube-stage-artist">Official embedded playback</small></div></div><button id="close-youtube-stage" aria-label="Close player">×</button></div><div id="youtube-player"></div><p class="youtube-stage-note">Playback is provided by YouTube. Some videos may not allow embedding.</p></section>
+  <button class="player-restore" id="restore-youtube-stage" hidden><span>♫</span><span><b id="restore-player-title">SONORA PLAYER</b><small>Restore player</small></span><span>↗</span></button><section class="youtube-stage" id="youtube-stage" aria-label="Movable YouTube player" hidden><div class="youtube-stage-head" id="youtube-stage-drag"><div class="youtube-stage-heading"><span class="drag-grip" aria-hidden="true">⠿</span><div><p class="eyebrow">NOW PLAYING · YOUTUBE</p><strong id="youtube-stage-title">Choose a track</strong><small id="youtube-stage-artist">Official embedded playback</small></div></div><div class="youtube-stage-actions"><button id="minimize-youtube-stage" aria-label="Minimize player" title="Minimize">—</button><button id="close-youtube-stage" aria-label="Close player" title="Close">×</button></div></div><div id="youtube-player"></div><p class="youtube-stage-note">Playback is provided by YouTube. Some videos may not allow embedding.</p></section>
   <div class="auth-backdrop" id="auth-backdrop" hidden>
     <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title">
       <button class="auth-close" id="auth-close" aria-label="Close sign in">×</button>
@@ -75,6 +75,7 @@
       <button class="auth-text-btn" id="auth-forgot">Forgot password?</button>
       <p class="auth-switch" id="auth-switch">New to SONORA? <button type="button" id="auth-switch-btn">Create an account</button></p>
       <p class="auth-message" id="auth-message" role="status"></p>
+      <div class="profile-editor" id="profile-editor" hidden><div class="profile-editor-heading">YOUR PROFILE</div><label class="auth-label" for="profile-display-name">Display name</label><input id="profile-display-name" type="text" maxlength="50" placeholder="Your name"><button class="auth-submit profile-save" id="profile-save" type="button">Save profile</button></div>
       <p class="auth-legal">By continuing, you agree to use SONORA respectfully. Your account is managed securely by Firebase Authentication.</p>
     </section>
   </div>
