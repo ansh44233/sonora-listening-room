@@ -47,7 +47,8 @@ The interface combines a curated-feeling home screen, mood shortcuts, searchable
 - Recently played list.
 - Create, rename, open and delete playlists.
 - Add search results to playlists.
-- Local browser persistence using `localStorage`.
+- Local browser persistence using `localStorage` for signed-out sessions.
+- Signed-in library backup and cross-device sync through Cloud Firestore, scoped to the authenticated user.
 
 ### Your account
 - Google sign-in through Firebase Authentication.
@@ -99,6 +100,7 @@ Browser UI
 | Playback | YouTube IFrame Player API |
 | Serverless API | Vercel Functions / Node.js |
 | Browser persistence | localStorage |
+| Cloud library | Cloud Firestore with per-user security rules |
 | Tests | Node.js built-in test runner |
 | Hosting | Vercel |
 
@@ -140,7 +142,16 @@ Update `firebase-config.js` with your Firebase Web App configuration. In Firebas
 
 Firebase web configuration is client-side configuration, not an Admin SDK credential. Never commit service-account JSON or private keys.
 
-### 4. Start the app
+### 4. Enable cloud library sync (optional but recommended)
+
+1. Create a Cloud Firestore database in the same Firebase project.
+2. In Firebase Console → Firestore → Rules, publish the rules from `firestore.rules` (or deploy them with the Firebase CLI).
+3. The rules allow each authenticated user to access only `sonoraLibraries/{their-uid}`. Do not replace them with public read/write rules.
+4. When a user signs in, SONORA merges the browser library with that user's cloud library and saves future library changes to Firestore. Signed-out use remains local-only.
+
+Cloud sync requires Firestore to be enabled and the security rules to be published. Authentication alone does not create the Firestore database.
+
+### 5. Start the app
 
 ```bash
 npx vercel dev
@@ -182,8 +193,8 @@ Suggested release checklist:
 
 - **Playback:** SONORA embeds YouTube videos. It does not download, extract, proxy, strip ads from or bypass restrictions on YouTube media.
 - **Availability:** A video may be unavailable for embedding, private, region-restricted, age-restricted or removed. The video owner and YouTube determine playback availability.
-- **Library sync:** Likes, recent tracks and playlists currently use browser-local storage. They are not synchronized between devices or accounts.
-- **Authentication:** Firebase sign-in is implemented separately from library persistence; signing in does not currently cloud-sync the library.
+- **Library sync:** Signed-out likes, recent tracks and playlists stay in browser storage. Signed-in users can sync these collections through Cloud Firestore after enabling the database and publishing `firestore.rules`.
+- **Authentication:** Firebase Authentication identifies the user; Firestore rules restrict each library document to its owner. Keep Firestore rules enabled and never use public read/write access.
 - **Quota:** YouTube Data API requests consume project quota. Search only runs after explicit submission.
 - **Privacy:** Do not store passwords or sensitive account data in local storage. Firebase manages authentication credentials.
 
