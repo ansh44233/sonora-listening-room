@@ -1,9 +1,12 @@
-// Firebase web config is public client configuration, not a private server secret.
-// Create a Firebase project, register a Web app, and replace these placeholders.
-// Restrict the API key to Firebase APIs and add your Vercel domain to Authorized domains.
+// Firebase Web App configuration for SONORA.
+// This is public client configuration. Restrict the API key in Google Cloud.
+// Never put Firebase Admin SDK credentials or service-account private keys here.
 export const firebaseConfig = {
-  apiKey: "PASTE_FIREBASE_WEB_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  appId: "YOUR_FIREBASE_APP_ID"
+  apiKey: "AIzaSyAnQQkBBH5NjEQAcL9LJC9-P5uXPx4U2_0",
+  authDomain: "oonrr-e5b98.firebaseapp.com",
+  projectId: "oonrr-e5b98",
+  storageBucket: "oonrr-e5b98.firebasestorage.app",
+  messagingSenderId: "451494163301",
+  appId: "1:451494163301:web:b549eaeaa97bf9df7da78c",
+  measurementId: "G-JYR4P5EYDT"
 };
